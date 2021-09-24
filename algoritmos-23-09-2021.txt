@@ -1,0 +1,53 @@
+'''
+Algoritmos 23 09 2021
+
+TP3
+
+Ejercicio 4
+------------
+
+Factores
+
+V = [3,1,5,2,1]
+W = 400
+
++ suma 
+* mult
+^ pow
+
+3 + 1 * 5 ^ 2 * 1
+=>
+(((3 + 1) * 5) ^ 2) * 1
+=>
+4 -> 20 -> 400 -> 400
+
+
+V = []
+W = ... 
+=> false
+
+V = [0]
+W = 0
+=> true
+'''
+
+
+def init(V, W):
+    if V.size == 0:
+        return False
+    Cache = Matrix(len(V), W)
+    return factores(V, len(V), W, Cache)
+
+def factores(V, iterator, W, Cache):
+    if len(V) == 1:
+        return V[0] == W
+    
+    currentValue = V.pop()
+    return factoresCache(V, iterator, W-currentValue) or factoresCache(V, iterator, W/currentValue) or factoresCache(V, iterator, pow(W, 1/currentValue))
+
+
+def factoresCache(V, iterator, W, Cache):
+    if Cache[(V,W)] is None:
+        Cache[(V,W)] = factores()        
+    return Cache[(V,W)]
+

@@ -1,0 +1,79 @@
+'''TP3:
+
+Problema de la mochila
+-----------------------
+
+|=========|
+|TOP-DOWN |
+|=========|
+
+def mochila_init(p, v, n, c):
+	PD = []
+	PD[0..n, 0..c] <- None
+	return mochila_rec(p, v, n, c)
+end
+
+def mochila_rec(p, v, n, c):
+	if n == 0 or c == 0:
+		return 0
+	end
+
+	if p[n] <= c:
+		return max(mochila_rec_if(p, v, n-1, c - p[n]) + v[n]), 
+					mochila_rec_if(p, v, n-1, c))
+	else:
+		return mochila_rec_if(p, v, n-1, c)
+	end
+
+end
+
+
+def mochila_rec_if(p, v, n, c):
+	if PD[n, c] == None:
+		PD[n, c] = mochila_rec(p, v, n, c)
+	end
+
+	return PD[n, c]
+end
+
+
+-------------
+Codigo python profe
+'''
+
+def knapsack_top_down(P, V, n, c):
+	dp = [[None] * (n+1)] * (c + 1) #Matrix instance
+	return _knapsack_top_down(P, V, n, c, dp)
+
+def _knapsack_top_down(P, V, n, c, dp):
+	if n == 0 or c == 0:
+		return 0
+
+	if dp[n][c] is None:
+		best_profit_so_far = _knapsack_top_down(P, V, n-1, c)
+		item_weight = P[n-1]
+		item_value = V[n-1]
+		if item_weight <= c:
+			best_profit_so_far = max(best_profit_so_far, item_value + _knapsack_top_down(P, V, n-1, c - item_weight))
+		dp[n][c] = best_profit_so_far
+	return dp[n][c]
+'''
+|==========|
+|Bottom-Up |
+|==========|
+'''
+def ks_bu(P, V, n, c):
+	dp = [[None] * (n+1)] * (c + 1)	#Matrix instance
+
+	dp[0][0] = 0
+	for i in range(1, n+1): #O(n)	|
+		dp[i][0] = 0	#O(1)		|
+#									| O(n+c) = O(max(n, c))
+	for i in range(1, c+1):	#O(c)	|
+		dp[0][i] = 0	#O(1)		|
+
+	for i in range(1, n+1):		# O(n.c)
+		for j in range(1, c+1):												
+			dp[i][j] = max(dp[i-1][j], c>=0 ? dp[i-1][j-P[i]] + V[i] : 0)
+
+	return dp[n][c]
