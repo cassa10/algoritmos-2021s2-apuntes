@@ -1,0 +1,134 @@
+
+Ejercicio 4: Factores
+
+V = [3, 1, 5, 2, 1]
+W = 400
+
++ suma
+* mult
+^ pot
+
+(((3 + 1) * 5) ^ 2) * 1
+
+4
+20
+400
+400
+
+V = []
+W = ...
+
+V = [0]
+W = 0
+
+-----------------------------
+
+factors(V, 0) = True
+
+factors([], W) = false
+factors([x], W) = x == W
+factors((e: V), W) = factors(V, W-e) or factors(V, W/e) or factors(V, W^(1/e))
+
+V = 3, 1, 5, 2, 1
+W = 400
+
+400/1 = 400
+
+sqroot(400) = 20
+
+20 / 5 = 4
+
+4 - 1 = 3
+
+3 = 3 = True
+
+3, 1, 5, 2
+
+---------------------------
+
+TOP DOWN
+factors(vector, i, weight, matrix):
+  if not V and weight == 0:
+    return True
+
+  if not V:
+    return False
+
+  if len(vector) == 1:
+    return vector[0] == weight
+
+  value = vector.pop()
+  ... usar matrix si ya esta cargada...
+  result_sum = factors(vector, weight - value)
+  
+  if result_sum:
+    return result_sum
+
+  result_mult = factors(vector, weight / value)
+  if result_mult:
+    return result_mult
+  
+  result_pot = factors(vector, weight ^ (1/value))
+  if result_pot:
+    return result_pot
+  
+  return False
+
+factors(vector, weight)
+  matrix = generarMatrix(len(vector), weight)
+  factors(vector, len(vector) - 1, weight, matrix)
+  return matrix[i][weight]
+
+--------------------------
+BOTTOM UP
+
+factors(V, w):
+
+  matrix = generarMatrix(len(vector) + 1, weight + 1)
+  # empezamos con soluciones conocidas
+  matrix[0][V[0]] = True
+  
+  
+  for i in range(1, len(V))
+    for j in range(1, w)
+      
+      value = V[i]
+      result_sum = j - value
+      result_mul = j / value
+      result_pot = j ** (1/value)
+
+      matrix[i][j] = matrix[i-1][result_sum] or matrix[i-1][result_mul] or matrix[i-1][result_pot]
+
+  val = w
+  n = len(V)
+  resultado = []
+  for i in range(n, 1, -1)
+    value = V[i]
+
+    result_sum = val - value
+    if matrix[i-1][result_sum]:
+      // es parte de la solucion
+      resultado.append("+")
+      val = result_sum
+      continue
+    
+    result_mul = val / value
+    if matrix[i-1][result_mul]:
+      // es parte de la solucion
+      resultado.append("*")
+      val = result_mul
+      continue
+     
+    result_pot = val ** (1/value)
+    if matrix[i-1][result_pot]:
+      // es parte de la solucion
+      resultado.append("^")
+      val = result_pot
+      continue
+    
+  print(resultado)
+  matrix[i][j] = matrix[i-1][result_sum] or matrix[i-1][result_mul] or matrix[i-1][result_pot]
+
+  return matrix[len(V)][w]
+
+
