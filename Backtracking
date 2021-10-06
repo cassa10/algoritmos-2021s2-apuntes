@@ -1,0 +1,41 @@
+Backtracking
+-------------
+
+BTenumeracion(instancia):
+	if casoBase(instancia):
+		return conjSolucion(instancia)
+
+
+	acum = {} //conjunto vacio
+
+	for hijo of hijos(instancia):
+		if isValid(hijo):
+			acum = union(acum, BTenumeracion(h))
+
+
+BTbusqueda(instancia):
+	if casoBase(instancia): //encontre lo que buscaba
+		return True, instancia
+
+	for hijo in hijos(instancia):
+		if esValido(hijo): // si cumple los requisitos
+			found, solution = BTbusqueda(instancia)
+			if found:
+				return found, solution 
+
+	return False, instanciaVacia
+
+BTOptimizacion(instancia):
+	if casoBase(instancia): //encontrar solucion valida
+		return instancia, solucionInst
+
+	mejorSol = {}
+	mejorVal = +inf
+	for hijo in hijos(instancia):
+		if esValido(hijo, mejorVal):
+			inst, val = BTOptimizacion(hijo)
+			if val < mejorVal:
+				mejorVal = val
+				mejorSol = inst
+
+	return mejorVal, mejorSol

@@ -1,0 +1,57 @@
+Algoritmos-05-10-2021
+
+Trabajo Practico 4 - Ejercicio 2
+
+grid = [[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0]]
+
+
+def sudoku(grid):
+	return sudokuBT(grid, )
+
+def sudokuBT(grid, posicionSig):
+	if posicionSig == None:
+		return True, grid
+
+	for i in range(1, 9):
+		newGrid = fill(grid, posicionSig, i)
+		if isValid(newGrid, posicionSig):
+			found, resultGrid = sudokuBT(newGrid, getSig(newGrid, posicionSig))
+			if found:
+				return True, resultGrid
+
+
+
+
+--------------------------------------
+
+Trabajo Practica 4 - Ejercicio 3.B
+
+distancias: {(c1,c2): d, (c1,c3): d, ...}
+
+def viajante(distancias):
+	recorrido = []
+	return _viajante(distancias, recorrido, 0)
+
+def _viajante(distancias, recorrido, 0):
+
+	if len(distancias.ciudades) == len(recorrido):
+		return 
+
+
+
+
+Examen presencial:
+
+Jueves 14/10 - Aula a confirmar
+
+
+
+
