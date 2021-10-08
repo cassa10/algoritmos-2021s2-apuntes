@@ -1,0 +1,8 @@
+Algoritmos 23 09 2021
+
+def knapsack(elems, cap):
+    ordenarValorSobrePeso(elems)
+
+    mientrasTengaEspacioEnLaMochilaVoyMetiendo()
+    ...
+    Apuntes fisicos
