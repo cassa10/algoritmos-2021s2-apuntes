@@ -1,0 +1,29 @@
+Grafos - algoritmos 19-10-2021
+
+Retornar todos los nodos que esten a una distancia x de un vertice v.
+
+def bfs_distance_nodes(G, s, distancia):
+    if distancia == 0:
+        return [s]
+
+    for v in G.nodes():
+        G.nodes[v]["predecesor"] = False
+        G.nodes[v]["distancia"] = np.inf
+    G.nodes[s]["predecesor"] = False
+    G.nodes[s]["distancia"] = 0
+
+    cola = deque()
+    cola.append(s)
+    result = []
+
+    while len(cola) != 0 and G.nodes[cola.inspectFirst()]["distancia"] < distancia + 1:
+        u = cola.pop()
+        for v in G[u]:
+            if G.nodes[v]["distancia"] == np.inf:
+                G.nodes[v]["visitado"] = True
+                G.nodes[v]["predecesor"] = u
+                current_d = G.nodes[u]["distancia"] + 1
+                G.nodes[v]["distancia"] = current_d
+                if current_d == distancia:
+                    result.append(v)
+                cola.appendleft(v) 

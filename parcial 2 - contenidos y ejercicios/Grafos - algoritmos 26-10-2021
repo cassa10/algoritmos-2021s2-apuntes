@@ -1,0 +1,43 @@
+Grafos - algoritmos 26-10-2021
+
+Arbol Generador Minimo 
+
+Prim y Kruskal
+
+v(G) -> conjunto de nodos
+e(G) -> conjunto de aristas
+w(e) -> entero (peso de la arista), donde e pertenece a e(G)
+
+extremos(e) -> devuelve el par de nodos que es conectado por "e", ejemplo (A, B) donde A y B son nodos
+
+def Prim(G):
+	n = len(v(G))
+	e = minArista(e(G))
+	visitados = extremos(e)
+	A = {e}
+
+	AristasOrd = sort(e(G))
+	while len(A) < n - 1:
+		e = minAristaConUnoVisitado(AristasOrd, visitados) //Solo cambia esta linea
+		agregar(A,e)
+		agregar(visitados, extremos(e))
+
+//O(m)
+def minAristaConUnoVisitado(Aristas, visitados): 
+	L = Aristas							 
+	while not unoSoloAdentro(prim(L), visitados) //O(m)
+		L = tail(L)
+	return prim(L)
+
+
+unoSoloAdentro = v pertenece  
+def Kruskal(G):
+	n = len(v(G))
+	e = minArista(e(G))
+	visitados = extremos(e)
+	A = {e}
+
+	while len(A) < n - 1:
+		e = minAristaConASinCiclos(e(G), A) //Solo cambia esta linea
+		agregar(A,e)
+		agregar(visitados, extremos(e))
